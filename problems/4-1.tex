@@ -1,0 +1,16 @@
+\begin{problem}[习题4.1]
+设有$n$个顾客同时等待一项服务. 顾客$i$需要的服务时间为$t_i$, $1\leq i\leq n$. 应该如何安排$n$个顾客的服务次序才能使总的等待时间达到最小? 总的等待时间是各顾客等待服务的时间的总和. 试给出你的做法的理由(证明).
+\end{problem}
+\begin{solution}
+\textbf{解:}所需服务时间越短的顾客, 排在越前面. 即有$t_1\leq t_2\leq \cdots \leq t_n$. 其中下标为服务的顺序. 下面证明其为最优解.\\
+\textbf{证:}设$T=[t_1,t_2,\cdots,t_i,\cdots,t_n]$, $t_i\leq t_{i+1}$不是最优解. $Y=[y_1,y_2,\cdots,y_i,\cdots,y_n]$ 是最优解,则必存在$i$使得$y_i>y_{i+1}$
+则对于解$Y$, 各顾客等待服务的时间总和为
+{\setlength\arraycolsep{2pt}
+\begin{eqnarray}
+T_{Y} & = & \underbrace{0}_{1}+ \underbrace{y_1}_{2} + \underbrace{y_1+y_2}_{3} + \cdots + \underbrace{y_1+\cdots + y_{i}}_{i+1} + \cdots + \underbrace{y_1+\cdots + y_{n-1}}_{n}\nonumber\\
+& = & (n-1)y_1 + (n-2)y_2 +\cdots +(n-i)y_i + (n-(i+1))y_{i+1} + \cdots + 2y_{n-2} + y_{n-1}\nonumber\\
+& > & (n-1)y_1 + (n-2)y_2 +\cdots +(n-i)y_{i+1} + (n-(i+1))y_{i} + \cdots + 2y_{n-2} + y_{n-1}\nonumber
+\end{eqnarray}}
+因此, $Y'=[y_1,y_2,\cdots,y_{i+1},y_i\cdots,y_n]$比$Y$更优, 因此$Y$不是最优解, 故假设不成立. 因此$T=[t_1,t_2,\cdots,t_i,\cdots,t_n]$, $t_i\leq t_{i+1}$是最优解.
+
+\end{solution}

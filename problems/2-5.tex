@@ -1,0 +1,50 @@
+\begin{problem}[习题1.5]
+实现图的D-搜索算法. 要求用ALGEN语言写出算法的伪代码, 或者用一种计算机高级语言写出程序.
+\end{problem}
+\begin{solution}
+\textbf{解:}先将起始顶点存入栈中. 搜索时, 取出栈顶元素, 遍历其邻点, 将未搜索的存入栈, 遍历其邻点后, 重复此过程, 直至栈变为空栈.
+\begin{table}[!htb]
+\centering
+\caption{\label{DsearchG}图的D-搜索算法伪代码}
+\begin{tabular}{llllll}
+\hline
+\multicolumn{6}{l}{\textbf{Proc  DBFT(G,m)}\textcolor{blue}{ //m为不连通分支数}} \\
+ & \multicolumn{5}{l}{ count:=0 ;\textcolor{blue}{//计数器,标示已经被访问的顶点个数}} \\
+ & \multicolumn{5}{l}{\textbf{for} i \textbf{to} n \textbf{do}} \\
+ &  & \multicolumn{4}{c}{visited[i]:=0;\textcolor{blue}{ //数组visited标示各顶点被访问的序数,其元素初始化为0.}} \\
+ & \multicolumn{5}{l}{\textbf{end{for}}} \\
+ & \multicolumn{5}{l}{\textbf{for} i to m \textbf{do}  \textcolor{blue}{//遍历不连通分支的情况}} \\
+ &  & \multicolumn{4}{l}{\textbf{ if} visited[i]=0 then} \\
+ &  &  & \multicolumn{3}{l}{DBFS (i); } \\
+ &  & \multicolumn{4}{l}{\textbf{end\{if\}}} \\
+ & \multicolumn{5}{l}{\textbf{end\{for\}}} \\
+\multicolumn{6}{l}{\textbf{end\{DBFT\}}} \\
+\hline
+\end{tabular}
+\end{table}
+表\ref{DsearchG}是图的D-搜索算法伪代码. 表\ref{DsearchG}中调用的DBFS为由一点出发的D-搜索,其伪代码见表\ref{DsearchV}
+\newpage
+\begin{table}[!htb]
+\centering
+\caption{\label{DsearchV}由一点出发的D-搜索算法伪代码}
+\begin{tabular}{llllll}
+\hline
+\multicolumn{6}{l}{\textbf{Proc DBFS(v)} } \\
+\multicolumn{6}{l}{\textcolor{blue}{//数组visited标示各顶点被访问的序数,其元素初始化为0}} \\
+\multicolumn{6}{l}{\textcolor{blue}{// 计数器count计数到目前为止已经被访问的顶点个数, 初始化为0}} \\
+ & \multicolumn{5}{c}{ PushStack (v , S); \textcolor{blue}{//首先访问v,将S初始化为只含有一个元素v的栈}} \\
+ & \multicolumn{5}{l}{count :=count +1; visited[v] := count;} \\
+ & \multicolumn{5}{l}{\textbf{While}  S 非空 \textbf{do}} \\
+ &  & \multicolumn{4}{l}{u :=PullHead(S); \textcolor{blue}{//取出栈顶的元素u, 并从栈中删除}} \\
+ &  & \multicolumn{4}{l}{\textbf{for} 邻接于u的所有顶点w  \textbf{do}} \\
+ &  &  & \multicolumn{3}{l}{\textbf{if}  visited[w] = 0 \textbf{then}} \\
+ &  &  &  & \multicolumn{2}{l}{PushStack(w,S); \textcolor{blue}{//将w存入栈S}} \\
+ &  &  &  & \multicolumn{2}{l}{ count :=count +1; visited[w] := count;} \\
+ &  &  & \multicolumn{3}{l}{\textbf{end\{if\}}} \\
+ &  & \multicolumn{4}{l}{\textbf{end\{for\}}} \\
+ & \multicolumn{5}{l}{\textbf{end\{while\}}} \\
+\multicolumn{6}{l}{\textbf{end\{DBFS\}}} \\
+\hline
+\end{tabular}
+\end{table}
+\end{solution}

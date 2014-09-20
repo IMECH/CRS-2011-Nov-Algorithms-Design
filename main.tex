@@ -1,0 +1,183 @@
+\documentclass[12pt,a4paper,boxed,titlepage]{caspset}
+
+% set 1-inch margins in the document
+%\usepackage[left=1in,right=1in,top=1.2in,bottom=1in]{geometry}
+\usepackage[left=1in,right=1in,top=1.2in,bottom=1in]{geometry}
+\usepackage{lastpage}
+% include this if you want to import graphics files with /includegraphics
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{chngpage}
+\usepackage{soul}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{graphicx,float,wrapfig}
+\usepackage{ifthen}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{multimedia}
+\usepackage[toc,page,title,titletoc,header]{appendix}
+\usepackage{multicol} 
+\usepackage{xeCJK}
+\usepackage{soul}
+\usepackage{xcolor}
+
+
+
+%\usepackage{fontspec}
+\setCJKmainfont[BoldFont=simhei.ttf]{simsun.ttf}
+%\setCJKsansfont{simhei.ttf}
+%\setCJKmonofont{simfang.ttf}
+
+%\setCJKmainfont{Adobe Song Std}
+%\setCJKmainfont[BoldFont=Adobe Heiti Std]{Adobe Song Std}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\graphicspath{{figures/}}
+
+\setulcolor{red}
+
+\setlength{\marginparwidth}{1in}
+
+\newcommand{\hmwkTitle}{算法设计与分析}
+\newcommand{\hmwkSubTitle}{第一章{~}复杂性分析初步} % No subtitle, so this will be excluded
+\newcommand{\hmwkDueDate}{\today}
+\newcommand{\hmwkClass}{信息工程学院}
+\newcommand{\hmwkClassTime}{Tue/Thu{~}8:00}
+\newcommand{\hmwkClassInstructor}{陈玉福}
+\newcommand{\hmwkAuthorName}{周吕文}
+
+%% Setup the header and footer
+\pagestyle{fancy}                                                       %
+\lhead{\hmwkAuthorName}                                                 %
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}  %
+\rhead{第\ \thepage\ 页, 共\ \protect\pageref{LastPage} 页}          %
+
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+\newcommand\invisiblesubsection[1]{%
+  \refstepcounter{subsection}%
+  \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1}%
+  \subsectionmark{#1}}
+
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\renewcommand\refname{\bf\large 参考文献}
+\renewcommand\contentsname{\bf 目 \ \ \ 录}
+\renewcommand\figurename{\bf 图}
+\renewcommand\tablename{\bf 表}
+\renewcommand{\appendixtocname}{附录}
+\renewcommand{\appendixpagename}{附录}
+\renewcommand\listfigurename{图目录}
+
+\usepackage{listings} % 添加宏包
+\definecolor{DarkGreen}{rgb}{0.0,0.3,0.0}
+ \lstset %定义程序代码显示版面,可自定义 .
+{language=c++,
+numbers=left,
+numberstyle=\ttfamily\scriptsize,
+frame=single,
+basicstyle=\ttfamily\small,
+keywordstyle=\ttfamily\bf\color{Blue},
+ndkeywordstyle=\ttfamily\bf\color{Brown},
+commentstyle=\color{DarkGreen},
+identifierstyle=\ttfamily\color{black}\bfseries,
+stringstyle=\color{pink}\ttfamily,showstringspaces=false,
+breaklines=true,
+escapeinside=``
+}
+
+\begin{document}
+\title{算法设计与分析(2011-2012秋)\\作业整理\\ \vspace{-20pt} }
+
+\author{{\Large 授课老师:陈玉福}\\ \vspace{50pt}\\ 周吕文\\ \href{mailto:zhou.lv.wen@gmail.com}{zhou.lv.wen@gmail.com}\\ \vspace{50pt}}
+\date{中国科学院力学研究所\\2011年11月28日}
+%\tableofcontents
+\maketitle 
+
+\tableofcontents
+\newpage
+
+%\includepdf[pages=1-]{cover}
+%\setcounter{page}{1}
+\invisiblesection{第一章{~}复杂性分析初步}
+\problemlist{\bf 第一章{~}复杂性分析初步}
+\invisiblesubsection{习题1.1}
+\input{./problems/1-1.tex}
+\invisiblesubsection{习题1.5}
+\input{./problems/1-5.tex}
+\invisiblesubsection{习题1.6}
+\input{./problems/1-6.tex}
+\invisiblesubsection{习题1.8}
+\input{./problems/1-8.tex}
+
+\newpage
+\invisiblesection{第二章{~}图与遍历算法}
+\problemlist{\bf 第二章{~}图与遍历算法}
+\invisiblesubsection{习题2.1}
+\input{./problems/2-1.tex}
+\invisiblesubsection{习题2.5}
+\input{./problems/2-5.tex}
+\invisiblesubsection{习题2.6}
+\input{./problems/2-6.tex}
+\invisiblesubsection{习题2.7}
+\input{./problems/2-7.tex}
+\invisiblesubsection{习题2.8}
+\input{./problems/2-8.tex}
+
+\newpage
+\invisiblesection{第三章{~}分治算法}
+\problemlist{\bf 第三章{~}分治算法}
+\invisiblesubsection{习题3.1}
+\input{./problems/3-1.tex}
+\invisiblesubsection{习题3.4}
+\input{./problems/3-4.tex}
+
+\newpage
+\invisiblesection{第四章{~}贪心算法}
+\problemlist{\bf 第四章{~}贪心算法}
+\invisiblesubsection{习题4.1}
+\input{./problems/4-1.tex}
+\invisiblesubsection{习题4.2}
+\input{./problems/4-2.tex}
+\invisiblesubsection{习题4.3}
+\input{./problems/4-3.tex}
+\newpage
+\invisiblesubsection{习题4.4}
+\input{./problems/4-4.tex}
+
+\newpage
+\invisiblesection{第五章{~}动态规划算法}
+\problemlist{\bf 第五章{~}动态规划算法}
+\invisiblesubsection{习题5.1}
+\input{./problems/5-1.tex}
+\invisiblesubsection{习题5.2}
+\input{./problems/5-2.tex}
+\invisiblesubsection{习题5.3}
+\input{./problems/5-3.tex}
+\invisiblesubsection{习题5.4}
+\input{./problems/5-4.tex}
+
+
+
+\newpage
+\appendix
+\appendixpage
+\lhead{附录A: 程序}
+\section{两种排序算法的C++程序及其时间复杂性测试程序}\label{sec:sort}
+\lstinputlisting{./cpp/sort.cpp}
+
+\section{Huffman编码C++程序}\label{sec:Huffman}
+\lstinputlisting{./cpp/Huffman.cpp}
+\end{document} 

@@ -1,0 +1,22 @@
+\begin{problem}[习题2.1]
+证明下列结论:
+\begin{enumerate}
+\item 在一个无向图中, 如果每个顶点的度大于等于2, 则该该图一定含有圈;
+\item 在一个有向图D中, 如果每个顶点的出度都大于等于1, 则该图一定含有一个有向圈.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+\begin{enumerate}
+\item \textbf{证:} 设该无向图无圈,有$m$条边,$n$个顶点. 则该无向图为树或森林,因此满足$m=n-k$,又由如果每个顶点的度大于等于2有
+\[
+\sum d(v) = 2|E| = 2m \geq 2n
+\]
+故有
+\begin{equation}\label{q1}
+m \geq n \Longrightarrow n - k \geq n, (k = 1,2,\cdots)
+\end{equation}
+显然式(\ref{q1})是不成立的,故假设该无向图无圈成立,即该该图一定含有圈.
+\item \textbf{证:} 设该有向图中的最长有向迹为$P=V_1V_2\cdots V_k$,
+又因为每个顶点的度大于等于1, 故存在$V'$为$V_k$连接到的点,若$V' \notin P$, 则$V_1V_2\cdots V_kV'$比$P$更长,与假设矛盾. 因此, $V'\in P$, 设$V'=V_n(n\leq k)$, 故存在有向圈$V_nV_{n+1}\cdots V_kV_n$
+\end{enumerate}
+\end{solution}

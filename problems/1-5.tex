@@ -1,0 +1,44 @@
+\begin{problem}[习题1.5]
+下面那些规则是正确的？为什么？
+\begin{enumerate}
+\item $\big\{f(n)=O\big(F(n)\big), g(n)=O\big(G(n)\big)\big\}\Rightarrow f(n)/g(n)=O\big(F(n)/G(n)\big)$;
+\item $\big\{f(n)=O\big(F(n)\big), g(n)=O\big(G(n)\big)\big\}\Rightarrow f(n)/g(n)=\Omega\big(F(n)/G(n)\big)$;
+\item $\big\{f(n)=O\big(F(n)\big), g(n)=O\big(G(n)\big)\big\}\Rightarrow f(n)/g(n)=\Theta\big(F(n)/G(n)\big)$;
+\item $\big\{f(n)=\Omega\big(F(n)\big), g(n)=\Omega\big(G(n)\big)\big\}\Rightarrow f(n)/g(n)=\Omega\big(F(n)/G(n)\big)$;
+\item $\big\{f(n)=\Omega\big(F(n)\big), g(n)=\Omega\big(G(n)\big)\big\}\Rightarrow f(n)/g(n)=O\big(F(n)/G(n)\big)$;
+\item $\big\{f(n)=\Theta\big(F(n)\big), g(n)=\Theta\big(G(n)\big)\big\}\Rightarrow f(n)/g(n)=\Theta\big(F(n)/G(n)\big)$;
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{解:}对以题中6个小命题,错误的给出反例,正确的给出证明,具体如下:
+
+\begin{enumerate}
+\item \textbf{错误:} 在满足题设条件下,不妨设$f(n) = F(n) = g(n) = 1$, $G(n) = n$,
+则显然不存在正常数$c$,当n足够大时使得:$1 = f(n)/g(n)\leq c F(n)/G(n) = c/n$.
+
+\item \textbf{错误:} 在满足题设条件下,不妨设$f(n) = G(n) = g(n) = 1$, $F(n) = n$,
+则显然不存在正常数$c$,当n足够大时使得:$1 = f(n)/g(n)\geq c F(n)/G(n) = cn$.
+
+\item \textbf{错误:} 由1,2两小题中的反例,可知在满足题设条件下, $f(n)/g(n)$和$F(n)/G(n)$不一定同阶.
+
+\item \textbf{错误:} 在满足题设条件下,不妨设$f(n) = F(n) = G(n) = 1$, $g(n) = n$,
+则显然不存在正常数$c$,当n足够大时使得:$1/n = f(n)/g(n)\geq c F(n)/G(n) = c$.
+
+\item \textbf{错误:} 在满足题设条件下,不妨设$F(n) = G(n) = g(n) = 1$, $f(n) = n$,
+则显然不存在正常数$c$,当n足够大时使得:$ n = f(n)/g(n)\leq c F(n)/G(n) = c$.
+
+\item \textbf{正确:} 由题意知:存在正常数$a_1$和$a_2$, 及$b_1$和$b_2$使得
+\[
+a_1F(n)\leq f(n) \leq a_2F(n), {~} b_1G(n)\leq g(n) \leq b_2G(n)
+\]
+则有
+\[
+\frac{a_1F(n)}{b_2G(n)}\leq \frac{f(n)}{g(n)} \leq \frac{a_2F(n)}{b_1G(n)}
+\]
+令$c_1 = a_1/b_2$, $c_2 = a_2/b_1$则有
+\[
+c_1\frac{F(n)}{G(n)}\leq \frac{f(n)}{g(n)} \leq c_2\frac{F(n)}{G(n)}
+\]
+\end{enumerate}
+\end{solution}

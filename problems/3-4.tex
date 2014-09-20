@@ -1,0 +1,41 @@
+\begin{problem}[习题3.4]
+说明算法PartSelect的平均时间复杂性为$O(n)$.\\
+\textbf{提示}:假定数组中的元素各不相同, 且第一次划分时划分元素$v$是第$i$小元素的概率为$1/n$. 因为Partition中的case语句所要求的时间都是$O(n)$, 所以, 存在常数$c$, 使得算法PartSelect 的平均时间复杂度$C_A^k(n)$可以表示为
+\[
+C_A^k(n)\leq cn+\frac{1}{n}\sum_{1\leq i < k}C_A^{k-1}(n-i) + \sum_{k<i\leq n}(C_A^k(i-1))
+\]
+令$R(n)=\max(C_A^k(n))$, 取$c\geq R(1)$试证明$R(n)\leq 4cn$
+\end{problem}
+\begin{solution}
+\textbf{证:}设$C_A^k(n)$表示在含$n$个元素的数组$A$中搜索第$k$小元素的平均时间复杂度, 假定数组中的元素各不相同, 且第一次划分时划分元素$v$是第$i$小元素的概率为$1/n$. 因为Partition中的case语句所要求的时间都是$O(n)$, 所以, 存在常数$c$, 使得算法PartSelect 的平均时间复杂度$C_A^k(n)$可以表示为
+\[
+C_A^k(n)\leq cn+\frac{1}{n}\sum_{1\leq i < k}C_A^{k-1}(n-i) + \sum_{k<i\leq n}(C_A^k(i-1))
+\]
+令$R(n)=\max(C_A^k(n))$, 取$c\geq R(1)/4$. 当$n=2$时, 有
+\[
+R(2)\leq 2c + \frac{1}{2}R(1)=2c+2c = 4c
+\]
+设对于$n>2$的所有自然数,$R(n)\leq 4cn$, 则有
+{\setlength\arraycolsep{2pt}
+\begin{eqnarray}
+R(n) & \leq & cn+\frac{1}{n}\Big(\sum_{1\leq i< k}R(n-i) + \sum_{k\leq i<n}R(i-1)\Big)
+\nonumber\\
+& \leq & cn + \frac{4c}{n}\Big(\sum_{1\leq i< k}(n-i) + \sum_{k\leq i<n}(i-1)\Big)
+\nonumber\\
+& \leq & cn + \frac{4c}{n}\Big(\frac{(k-1)(2n-k)}{2}+\frac{(n-k)(k+n-1)}{2}\Big)
+\nonumber\\
+& \leq & cn - \frac{4c}{n}\frac{(k-1)(2n-k)+(n-k)(k+n-1)}{2}
+\nonumber\\
+& \leq & cn - \frac{4c}{n}\Big(k^2-(n+1)k-\frac{n^2-3n}{2}\Big)
+\nonumber\\
+& \leq & cn - \frac{4c}{n}\Big(-(\frac{n+1}{2})^2-\frac{n^2-3n}{2}\Big)
+\nonumber\\
+& \leq & cn + c\frac{3n^2-4n+1}{n}
+\nonumber\\
+& \leq & cn + 3c(n-1)
+\nonumber\\
+& \leq & 4cn
+\nonumber
+\end{eqnarray}}
+因此, 平均时间复杂度为$C_A^k(n)\leq 4cn$, 故有$C_A^k(n) = O(n)$.
+\end{solution}

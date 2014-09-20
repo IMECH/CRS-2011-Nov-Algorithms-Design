@@ -1,0 +1,129 @@
+\begin{problem}[习题5.1]
+最大子段和问题：给定整数序列$a_1, a_2, \cdots, a_n$, 求该序列形如$\sum_{k=i}^j a_k$的子段和的最大值:
+$\max\{0, \max\limits_{1\leq i\leq j\leq n}\sum_{k=i}^j a_k\}$.
+\begin{enumerate}
+\item 已知一个简单算法如下:
+\begin{lstlisting}[language=C++][caption={c++}]
+int Maxsum(int n,int a,int& besti,int& bestj)
+{ int sum = 0;
+  for(int i=1;i<=n;i++){
+     int suma = 0;
+     for(int j=i;j<=n;j++){
+        suma + = a[j];
+        if(suma > sum){
+          sum = suma;
+          besti = i;
+          bestj = j; }
+     }
+  }
+  return sum;
+}
+\end{lstlisting}
+试分析该算法的时间复杂性.
+\item 试用分治算法解最大子段和问题, 并分析算法的时间复杂性.
+\item 试说明最大子段和问题具有最优子结构性质, 并设计一个动态规划算法解最大子段和问题. 分析算法的时间复杂度.\\
+(提示: 令$b(j) = \max\limits_{1\leq i\leq j\leq n}\sum_{k=i}^j a_k, j = 1, 2, \cdots, n$)
+\end{enumerate}
+\end{problem}
+\begin{solution}
+\begin{enumerate}
+\item \textbf{解:}该简单算法的执行步数统见表\ref{stepnum}.
+\begin{table}[!htb]
+\centering
+\caption{\label{stepnum}执行步数统计表}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\cline{1-4}\cline{6-9}
+\multicolumn{1}{|c|}{行数} & \multicolumn{1}{c|}{s/e} & \multicolumn{1}{c|}{频率} & \multicolumn{1}{c|}{总步数} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{行数} & \multicolumn{1}{c|}{s/e} & \multicolumn{1}{c|}{频率} & \multicolumn{1}{c|}{总步数} \\
+\cline{1-4}\cline{6-9}
+\multicolumn{1}{|c|}{01} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{08} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{n(n-1)/2} & \multicolumn{1}{c|}{n(n-1)/2} \\
+\multicolumn{1}{|c|}{02} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{09} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{n(n-1)/2} & \multicolumn{1}{c|}{n(n-1)/2} \\
+\multicolumn{1}{|c|}{03} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{n+1} & \multicolumn{1}{c|}{n+1} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{10} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{n(n-1)/2} & \multicolumn{1}{c|}{n(n-1)/2} \\
+\multicolumn{1}{|c|}{04} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{n+1} & \multicolumn{1}{c|}{n+1} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{11} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} \\
+\multicolumn{1}{|c|}{05} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{n(n+1)/2} & \multicolumn{1}{c|}{n(n+1)/2} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{12} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} \\
+\multicolumn{1}{|c|}{06} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{n(n-1)/2} & \multicolumn{1}{c|}{n(n-1)/2} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{13} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} \\
+\multicolumn{1}{|c|}{07} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{n(n-1)/2} & \multicolumn{1}{c|}{n(n-1)/2} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{14} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} & \multicolumn{1}{c|}{0} \\
+\cline{1-4}\cline{6-9}
+\end{tabular}
+\end{table}
+由表\ref{stepnum}可知该简单算法执行的总步数为:
+$2\times (n+1)+n(n+1)/2 + 5\times n(n-1)/2 = 6n^2+4$
+ 所以该算法时间复杂度为$O(n^2)$.
+
+\item 解最大子段的分治算法: 对给定序列$a[1:n]$对半划分为$a[1:\lfloor n/2\rfloor]$, $a[\lfloor n/2\rfloor+1:n]$, 并分别求出这两段的最大子段. 则原序列的最大子段有以下可能:
+    \begin{itemize}
+    \item 原序列的最大子段 = $a[1:\lfloor n/2\rfloor]$最大子段.
+    \item 原序列的最大子段 = $a[\lfloor n/2\rfloor+1:n]$最大子段.
+    \item 原序列的最大子段 = $a[1:\lfloor n/2\rfloor]$最大子段与$a[\lfloor n/2\rfloor+1:n]$最大子段组合.
+    \end{itemize}
+基于以上分析, 可得到解最大子段分治算法的伪代码, 见表\ref{MaxSubSum}.
+\begin{table}[!htb]
+\centering
+\caption{\label{MaxSubSum}解最大子段分治算法的伪代码}
+\begin{tabular}{lllll}
+\hline
+\multicolumn{5}{l}{\textbf{Proc} MaxSubSum(a, left, right)\textcolor{blue}{// a为整数序列}} \\
+ & \multicolumn{4}{l}{\textbf{if} left $<$ right \textbf{then}} \\
+ &  & \multicolumn{3}{l}{middle = $\lfloor\textrm{(left+right)}/2\rfloor$} \\
+ &  & \multicolumn{3}{l}{MaxSumLeft = MaxSubSum(a, left, middle)} \\
+ &  & \multicolumn{3}{l}{MaxSumRight = MaxSubSum(a,  middle+1, right)} \\
+ &  & \multicolumn{3}{l}{sumleft =0; maxleft = 0;} \\
+ &  & \multicolumn{3}{l}{\textbf{for} i \textbf{from} middle \textbf{to} left} \\
+ &  &  & \multicolumn{2}{l}{sumleft = sumleft + a(i)} \\
+ &  &  & \multicolumn{2}{l}{maxleft = \textbf{max}(sumleft, maxleft)} \\
+ &  & \multicolumn{3}{l}{\textbf{end\{for\}}} \\
+ &  & \multicolumn{3}{l}{sumright =0; maxright = 0;} \\
+ &  & \multicolumn{3}{l}{\textbf{for} i \textbf{from} middle+1 \textbf{to} right} \\
+ &  &  & \multicolumn{2}{l}{sumright = sumright + a(i)} \\
+ &  &  & \multicolumn{2}{l}{maxright = \textbf{max}(sumright, maxright)} \\
+ &  & \multicolumn{3}{l}{\textbf{end\{for\}}} \\
+ &  & \multicolumn{3}{l}{SumCombine = maxleft+maxright}\\
+ &  & \multicolumn{3}{l}{MaxLightRight = \textbf{max}(MaxSumLeft, MaxSumRight)} \\
+ &  & \multicolumn{3}{l}{MaxSum = \textbf{max}(SumCombine, MaxLightRight)} \\
+ &  & \multicolumn{3}{l}{\textbf{return} MaxSum} \\
+ & \multicolumn{4}{l}{\textbf{else}} \\
+ &  & \multicolumn{3}{l}{MaxSum = \textbf{max}(a(left),0)} \\
+ &  & \multicolumn{3}{l}{\textbf{return} MaxSum} \\
+\multicolumn{5}{l}{\textbf{end\{Proc\}}} \\
+\hline
+\end{tabular}
+\end{table}\\
+该算法的时间复杂度$T(n)$有递归关系式$T(n)=2T(n/2)+O(n), n>1$, $T(1) = O(1)$. 满足典型的分治算法递归关系式, 故$T(n) = O(n\log n)$
+\item 设$S(j)=\max\{a_1+a_2+\cdots + a_j, a_2+a_3+\cdots + a_j, \cdots, a_{j-1}+a_j,a_j\} = \max\limits_{1\leq i\leq j}\{\sum\limits_{k=i}\limits^ja_i\}$. 则子段和的最大值为$\max\{S(1), S(2), \cdots, S(n)\}$. 由S(j)的定义得
+    \[
+    S(j) = \max\limits_{1\leq i\leq j-1}\{a_j+\sum\limits_{k=i}\limits^{j-1}a_i, a_j\} = \max\{a_j+S(j-1), a_j\}
+    \]
+因此, $S(j)$具有最优子结构. 其动态规划最优子结构公式为:
+\[
+S(j) = \max\{S(j-1)+a_j, a_j\},{~} 1\leq j\leq n
+\]
+根据以上分析, 可得到解最大子段动态规划算法的伪代码, 见表\ref{Maxsum}.
+该算法的主要计算量取决于程序对$i$的for盾环, 循环体内的计算量为$O(1)$. 因此该算法的时间复杂度为$O(n)$.
+\begin{table}[!htb]
+\centering
+\caption{\label{Maxsum}解最大子段动态规划算法的伪代码}
+\begin{tabular}{llll}
+\hline
+\multicolumn{4}{l}{\textbf{Proc} MaxSum(a)\textcolor{blue}{//a为整数序列}} \\
+ & \multicolumn{3}{l}{n = $|a|$} \\
+ & \multicolumn{3}{l}{maxsum = 0; sum = 0;} \\
+ & \multicolumn{3}{l}{I = 0; J = 0; \textcolor{blue}{//初始化I,J. I,J 分别为最大子段的始终元素下标}} \\
+ & \multicolumn{3}{l}{\textbf{for} i \textbf{from} 1 \textbf{to} n} \\
+ &  & \multicolumn{2}{l}{\textbf{if} sum $> 0$ \textbf{then}} \\
+ &  &  & sum = sum + a[i]; \\
+ &  & \multicolumn{2}{l}{\textbf{else}} \\
+ &  &  & sum = a[i]; \\
+ &  &  & I = i; \\
+ &  & \multicolumn{2}{l}{\textbf{end\{if\}}} \\
+ &  & \multicolumn{2}{l}{\textbf{if} sum $>$ maxsum \textbf{then}} \\
+ &  &  & maxsum = sum; \\
+ &  &  & J = i; \\
+ &  & \multicolumn{2}{l}{\textbf{end\{if\}}} \\
+ & \multicolumn{3}{l}{\textbf{end\{for\}}} \\
+ & \multicolumn{3}{l}{\textbf{return} maxsum, I, J;} \\
+\multicolumn{4}{l}{\textbf{end\{Proc\}}} \\
+\hline
+\end{tabular}
+\end{table}
+\end{enumerate}
+
+\end{solution}

@@ -1,0 +1,48 @@
+\begin{problem}[习题1.6]
+
+\[
+4n^2,{~} \log n,{~} 3^n,{~} 20n,{~} n^{2/3},{~} n!
+\]
+\end{problem}
+\begin{solution}
+\textbf{解:} 按照渐近阶从低到高的顺序排列上述表达式:
+\[
+\log n < n^{2/3} < 20n  < 4n^2 < 3^n < n!
+\]
+\end{solution}
+
+
+\begin{problem}[习题1.7]
+\begin{enumerate}
+\item 假设某算法在输入规模是时为$T(n)=3*2^n$. 在某台计算机上实现并完成该算法的时间是$t$秒. 现有另一台计算机, 其运行速度为第一台的64倍, 那么, 在这台计算机上用同一算法在$t$秒内能解决规模为多大的问题?
+\item 若上述算法改进后的新算法的计算为$T(n)=n^2$, 则在新机器上用$t$秒时间能解决输入规模为多大的问题?
+\item 若进一步改进算法, 最新的算法的时间复杂度为$T(n)=8$, 其余条件不变, 在新机器上运行, 在$t$秒内能够解决输入规模为多大的问题?
+\end{enumerate}
+\end{problem}
+\begin{solution}
+\textbf{解:}
+\begin{enumerate}
+\item 设该算法在原计算机和新计算机上每步运行所需的时间分别为$t_1$, $t_2$, 则根据题意得:
+\[
+t_1 = \frac{t}{T(n)}, t_2 = \frac{t_1}{64}
+\]
+设该算法在新计算机上能解决的规模为$n'$,则有
+\[
+3\times 2^{n'}\times t_2 = 3\times 2^{n'}\times \frac{t_1}{64} = 3\times 2^{n}\times t_1
+\]
+解得$n'=n+6$, 因此在新计算机上用同一算法在$t$秒内能解决规模为$n+6$.
+
+\item 算法改进后的新算法的计算为$T(n)=n^2$. 则有
+\[
+t = n'^2\times t_1 = 3\times 2^{n}\times t_1
+\]
+解得$n'=\sqrt{3\cdot 2^{n+6}}$. 因此在新计算机上$t$秒内能解决规模为$\sqrt{3\cdot 2^{n+6}}$.
+
+\item 最新的算法的时间复杂度为$T(n)=8$. 则有
+\[
+t = 8\times t_1 = 3\times 2^n\times t_1
+\]
+显然上式与$n'$无关,即$T(n)$不随$n$变化,所以任意规模的$n'$都能在$t$秒内解决.
+
+\end{enumerate}
+\end{solution}

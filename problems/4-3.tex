@@ -1,0 +1,33 @@
+\begin{problem}[习题4.3]
+设$p_1$, $p_2$, $\cdots$, $p_n$是准备存放到长为$L$的磁带上的$n$个程序, 程序$p_i$需要
+的带长为$a_i$. 设$\sum_{i=1}^n>L$, 要求选取一个能放在带上的程序的最大子集合(即其中含有最多个数的程序)$Q$. 构造$Q$的一种贪心策略是按$a_i$的非降次序将程序计入集合.
+\begin{enumerate}
+\item 证明这一策略总能找到最大子集$Q$, 使得$\sum_{p_i\in Q}\leq L$.
+\item 设$Q$是使用上述贪心算法得到的子集合, 磁带的利用率可以小到何种程度?
+\item 试说明1问中提到的设计策略不一定得到使取最大值的子集合.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}
+\item \textbf{证:}设$a_1\leq a_2\leq \cdots\leq a_n$是按非降次序排列的. 设贪心策略构造的最大子集$Q=[a_1, a_2, \cdots, a_m]$ 使得
+    \[\sum_{i=1}^m a_i\leq L ,  \sum_{i=1}^{m+1} a_i> L\]
+
+    假设$Q$不是最大子集, 则至少存在$m+1$个元素的集合$P=[a_{i_1}, a_{i_2}, \cdots, a_{i_{m+1}}]$ 使得
+    \[\sum_{j=1}^{m+1} a_{i_j}\leq L ,  \sum_{j=1}^{m+2} a_{i_j}> L\]
+
+    因为$a_1\leq a_2\leq \cdots\leq a_n$是按非降次序排列的, 所以有
+    \[
+    L<\sum_{i=1}^{m+1} a_i < \sum_{j=1}^{m+1} a_{i_j}
+    \]
+    这与假设是矛盾的, 因为不存大于$m$个元素的集合, 即这一策略总能找到最大子集$Q$, 使得$\sum_{p_i\in Q}\leq L$.
+\item \textbf{解:}磁带的利用率为
+\[
+\alpha=\frac{\sum_{p_i\in Q}}{L}
+\]
+显然当$a_1>L$时$\alpha=0$, 因此磁带的利用率最小可为$0$.
+\item \textbf{解:}贪心策略构总能找到最大子集$Q$, 只表示$Q$中的元素能达到最大$m$, 并不表示能使得放在带上的程序最长. 如果存在
+    \[a_{m+1}+\sum_{i=1}^{m-1} a_i\leq L\]
+    显然其利用率比贪心策略构出的$Q$大, 因此1问中提到的设计策略不一定得到使取最大值的子集合.
+\end{enumerate}
+\end{solution}

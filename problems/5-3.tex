@@ -1,0 +1,16 @@
+\begin{problem}[习题5.3]
+考虑下面特殊的整数线性规划问题:
+\begin{align*}
+&\max\,\, \sum\limits_{i=1}\limits^{n}c_i x_i\\
+&\sum\limits_{i=1}\limits^{n} a_i x_i \leq b, x_i\in\{0, 1, 2\}, 1\leq i\leq n&
+\end{align*}
+试设计一个解此问题的动态规划算法, 并分析算法的时间复杂度.
+\end{problem}
+\begin{solution}
+\textbf{解:}设$p_{2i-1} = p_{2i} = c_i$, $y_{2i-1} = y_{2i} = x_i$, $w_{2i-1} = w_{2i} = a_i$ 则上述问题可转化经典的0/1背包问题.
+\begin{align*}
+&\max\,\, \sum\limits_{i=1}\limits^{n}p_i y_i\\
+&\sum\limits_{i=1}\limits^{2n} w_i y_i \leq b, y_i\in\{0, 1\}, 1\leq i\leq 2n&
+\end{align*}
+用经典的0/1背包问题的动态规划算法就可解此问题. 经典的0/1背包问题时间复杂性是$O(2^n)$, 因此该问题的时间复杂性为$O(2^{2n})$即$O(4^n)$
+\end{solution}

@@ -1,0 +1,56 @@
+\begin{problem}[习题1.8]
+Fibonacci数有递推关系:
+\begin{displaymath}
+F(n)\left\{ \begin{array}{ll}
+1, & n = 0 \\
+1, & n = 1 \\
+F(n-1) + F(n-2), & n>1
+\end{array} \right.
+\end{displaymath}
+试求出$F(n)$的表达.
+\end{problem}
+\begin{solution}
+\textbf{解:}设当$n>3$时$F(n)$, $F(n-1)$, $F(n-2)$满足:
+\[
+F(n)=F(n-1) + F(n-2)
+\]
+故其特征方程为
+\[
+\lambda ^2 = \lambda + 1
+\]
+解得:$\lambda_1 = (1+\sqrt{5})/2$, $\lambda_2=(1-\sqrt{5})/2$, 则可设
+\[
+F(n) = a \lambda_1^n + b\lambda_2^n
+\]
+由$F(2)=2$, $F(3)=3$, 解得$a=\frac{1+\sqrt{5}}{2\sqrt{5}}$, $b = -\frac{1-\sqrt{5}}{2\sqrt{5}}$
+因此有
+\[
+F(n) = \frac{1}{\sqrt{5}} = \Big[\big(\frac{1+\sqrt{5}}{2}\big)^{n+1}- \big(\frac{1-\sqrt{5}}{2}\big)^{n+1}\Big]
+\]
+
+%化简并与已知条件比较:
+%\[
+%F(n) = (\beta - \alpha) F(n-1) + \beta\alpha F(n-2) \Longleftrightarrow F(n) = F(n-1) + F(n-2)
+%\]
+%得$\beta - \alpha = 1$, $\alpha\beta = 1$. 不妨设$\alpha>0, \beta>0$, 可解得$\alpha = (\sqrt{5}-1)/2$, $\beta = (\sqrt{5}+1)/2$. 所以$\{F(n)+\alpha F(n-1)\}$为等比数列, 公比为$\beta$. 因此有
+%{\setlength\arraycolsep{2pt}
+%\begin{eqnarray}
+%F(n)+\alpha F(n-1) & = & (F(1)+\alpha F(0))\beta^{n-1}
+%\nonumber\\
+%& = & (1+\alpha)\beta^{n-1}
+%\nonumber\\
+%& = & \beta^{n}\nonumber
+%\end{eqnarray}}
+%因此有
+%\begin{eqnarray}
+%F(n) & = & \alpha F(n-1) + \beta^{n}
+%\nonumber\\
+%& = & \alpha (\alpha F(n-2) + \beta^{n-1}) +  \beta^{n}
+%\nonumber\\
+%& = & \alpha^2 F(n-2) + \alpha\beta^{n-1} +  \beta^{n}
+%\nonumber\\
+%& = & \alpha^{n-1} F(1) + \alpha^n+ \alpha^{n-1}\beta+ \cdots + \alpha\beta^{n-1} +  \beta^{n}
+%\nonumber\\
+%\end{eqnarray}}
+
+\end{solution}

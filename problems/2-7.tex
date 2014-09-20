@@ -1,0 +1,30 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{problem}[习题2.7]
+对图的另一种检索方法是D-Search. 该方法与BFS的不同之处在于将队列换成栈, 即下一个要检测的结点是最新加到未检测结点表的那个结点.
+\begin{enumerate}
+\item 写一个D-Search算法;
+\item 证明由结点v开始的D-Search能够访问$v$可到达的所有结点;
+\item 你的算法的时, 空复杂度是什么?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}
+\item \textbf{解:} D-Search算法如习题1.5中的表\ref{DsearchV}所示.
+\item \textbf{证:} 设$v_n$为$v$可到达的某一节点, $v$与$v_n$间的迹为$P = vv_1v_2\cdots v_n$. 由表\ref{DsearchV}的算法可知, $v$最先被放入栈,并被访问. 其后取出栈顶元素并访问, 同时其邻接的顶点被放入栈中,重复此过程,直至栈变空. 因此当$v$被取出时$v_1$将被放出栈中, 其后当$v_1$被取出时,$v_1$被访问的同时, $v_1$的邻点$v_2$被放入栈中. 假设$v_k$与$v_{k+1}$相邻, 若$v_k$可访问,则$v_{k+1}$也可被访问.下面用数学规纳法证明题设:
+    \begin{itemize}
+    \item 显然该假设对于$v(v_0)$,$v_1$成立.
+    \item 当$v_k$可访问时, $v_k$的所有邻点,包括$v_{k+1}$将被放入栈中, 栈中的顶点将逐个被取出访问, 因此$v_{k+1}$也将被访问.
+    \end{itemize}
+    所以, D-Search能够访问$v$可到达的结点$v_n$. 由于$v_n$是任意假设的, 因此D-Search能够访问$v$可到达的所有结点.
+\item \textbf{解:} 图$G$的D-搜索算法能够访问$G$中由$v$可能到达的所有顶点
+    如果记$t(v,\varepsilon)$ 和$s(v,\varepsilon)$ 为D-搜索算法在任意一个具有$v$个顶点和
+    $\varepsilon$条边的连通图$G$上所花的最大时间和最大空间.则可证明其时空复杂度:
+\begin{itemize}
+\item 除节点$v$外, 只有当结点$w$满足$visited[w]$才被存入栈中, 因此每个节点至多有一次被存入栈中, 需要的栈空间至多是$v-1$; $visited$数组需要的空间为$v$; 其于变量所用空间为$O(1)$, 所以该算法的空间复杂度为$s(v,\varepsilon) = \Theta(v)$.
+\item 如果使用邻接链表, 语句for循环要做$d(u)$次, 而语句while循环需要做$v$次,
+    因而整个循环做$\sum_{u\in V}d(u)=2\varepsilon$次$O(1)$操作, 又$visited$, 和$count$的赋值都需要$v$次操作, 因此时间复杂度为$t(v,\varepsilon) = \Theta(v+\varepsilon)$
+\item 如果采用邻接矩阵, 则语句while循环总共需要做$v^2$次操作, $visited$和$count$的赋值都需要$v$次操作, 因而时间复杂度为$t(v,\varepsilon) = \Theta(v^2)$.
+\end{itemize}
+\end{enumerate}
+\end{solution}

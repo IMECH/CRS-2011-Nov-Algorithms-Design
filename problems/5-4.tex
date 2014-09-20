@@ -1,0 +1,19 @@
+\begin{problem}[习题5.4]
+可靠性设计: 一个系统由$n$级设备串联而成, 为了增强可靠性, 每级都可能并联了不止一台同样的设备. 假设第$i$级设备$D_i$用了$m_i$台, 该级设备的可靠性是$g_i(m_i)$, 则这个系统的可靠性是$\prod g_i(m_i)$. 一般来说$g_i(m_i)$都是递增函数, 所以每级用的设备越多系统的可靠性越高. 但是设备都是有成本的, 假定设备$D_i$的成本是$c_i$, 设计该系统允许的投资不超过$c$, 那么, 该如何设计该系统(即各级采用多少设备)使得这个系统的可靠性最高. 试设计一个动态规划算法求解可靠性设计问题.
+\end{problem}
+\begin{solution}
+\textbf{解:}由于每一台设备至少需要一台, 故第$i$台设备至多可配置台数为
+\[
+M_i = \Big\lfloor \frac{c-\sum_{j=1}^n c_j}{c_i}\Big\rfloor + 1
+\]
+因此该问题的数学规划描述为
+\begin{align*}
+&\max\,\, \prod\limits_{i=1}\limits^n g_i(m_i)\\
+&s.t. {~} \sum\limits_{i=1}\limits^n m_i c_i \leq c, m_i\in \{1, 2, \cdots M_i\}&
+\end{align*}
+其向后递推关系为
+\[
+f_i(X) = \max\limits_{1\leq m_i\leq M_i}\{g_i(m_i)f_{i-1}(X-c_im_i)\} 
+\]
+由$f_0\Rightarrow f_1 \Rightarrow\cdots\Rightarrow f_n$, 回溯求出$m_1, m_2, \cdots, m_n$.
+\end{solution}
